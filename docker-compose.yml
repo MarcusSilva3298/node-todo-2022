@@ -4,12 +4,10 @@ version: "3.9"
 # The containers that compose the project
 services:
   db:
-    image: postgres:13
+    image: mysql:latest
     restart: always
-    container_name: integration-tests-prisma
+    container_name: mysql-prisma
     ports:
-      - "5433:5432"
+      - "3307:3306"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: docker
-      POSTGRES_DB: node-setup-test
+      MYSQL_ROOT_PASSWORD: "docker"
