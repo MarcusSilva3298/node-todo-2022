@@ -5,7 +5,7 @@ import { ToDo } from '../infra/entities/ToDo'
 export interface ITodoRepository {
   create(data: ICreateTodoDTO): Promise<ToDo>
 
-  findById(todo_id: string, user_id: string): Promise<ToDo>
+  findById(todo_id: string): Promise<ToDo>
 
   list(data: IListTodoDTO): Promise<ToDo[]>
 

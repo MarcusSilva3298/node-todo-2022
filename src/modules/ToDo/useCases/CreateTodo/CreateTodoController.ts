@@ -7,7 +7,6 @@ import { CreateTodoUseCase } from './CreateTodoUseCase'
 export class CreateTodoController {
   async handle(request: Request, response: Response) {
     const { title, description } = request.body
-    const { id: user_id } = request.user
 
     await Joi.object({
       title: Joi.string().required(),
@@ -17,7 +16,7 @@ export class CreateTodoController {
 
     const createTodoUseCase = container.resolve(CreateTodoUseCase)
 
-    const answer = await createTodoUseCase.execute({ title, description, user_id })
+    const answer = await createTodoUseCase.execute({ title, description })
 
     return response.json(answer)
   }

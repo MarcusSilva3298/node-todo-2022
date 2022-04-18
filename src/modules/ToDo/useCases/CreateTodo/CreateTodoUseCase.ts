@@ -3,7 +3,6 @@ import { ITodoRepository } from '@modules/ToDo/repositories/ITodoRepository'
 import { inject, injectable } from 'tsyringe'
 
 interface IRequest {
-  user_id: string,
   title: string
   description?: string
 }
@@ -15,7 +14,7 @@ export class CreateTodoUseCase {
     private todoRepository: ITodoRepository
   ) {}
 
-  async execute({ title, user_id, description }: IRequest): Promise<ToDo> {
-    return await this.todoRepository.create({ title, user_id, description })
+  async execute({ title, description }: IRequest): Promise<ToDo> {
+    return await this.todoRepository.create({ title, description })
   }
 }

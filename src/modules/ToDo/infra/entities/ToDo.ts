@@ -6,18 +6,22 @@ export class ToDo {
   public title: string
   public description?: string
 
-  public user_id?: string
+  public done?: boolean
 
   public created_at?: Date
   public updated_at?: Date
 
-  constructor (pros: Omit<ToDo, 'id'>, id?: string) {
+  constructor (pros: Omit<ToDo, 'id'>, id?: string, done?: boolean) {
     Object.assign(this, pros)
 
     if (!id) {
       this.id = v4()
       this.created_at = new Date()
       this.updated_at = new Date()
+    }
+
+    if (!done) {
+      this.done = false
     }
   }
 }

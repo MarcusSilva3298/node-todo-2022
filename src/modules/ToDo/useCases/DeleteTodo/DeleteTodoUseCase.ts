@@ -9,8 +9,8 @@ export class DeleteTodoUseCase {
     private todoRepository: ITodoRepository
   ) {}
 
-  async execute(todo_id: string, user_id: string) {
-    const todo = await this.todoRepository.findById(todo_id, user_id)
+  async execute(todo_id: string) {
+    const todo = await this.todoRepository.findById(todo_id)
 
     if (!todo) throw new AppError('ToDo not found', 404)
 

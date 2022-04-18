@@ -6,27 +6,21 @@ import { v4 } from 'uuid'
 import { ToDo } from '../entities/ToDo'
 
 export class TodoRepository implements ITodoRepository {
-  async create({ user_id, description, title }: ICreateTodoDTO): Promise<ToDo> {
-    return await prisma.todo.create({
-      data: {
-        id: v4(),
-        title,
-        description,
-        user: { connect: { id: user_id } }
-      }
-    })
+  async create({ description, title }: ICreateTodoDTO): Promise<ToDo> {
+    const todo = new ToDo({ description, title })
+
+    return await prisma.todo.create({ data: todo })
   }
 
-  async findById(id: string, user_id: string): Promise<ToDo> {
-    return await prisma.todo.findFirst({ where: { id, user_id } })
+  async findById(id: string): Promise<ToDo> {
+    return await prisma.todo.findFirst({ where: { id } })
   }
 
-  async list({ description, title, user_id }: IListTodoDTO): Promise<ToDo[]> {
+  async list({ description, title }: IListTodoDTO): Promise<ToDo[]> {
     return await prisma.todo.findMany({
       where: {
         title: { contains: title },
-        description: { contains: description },
-        user_id
+        description: { contains: description }
       }
     })
   }
